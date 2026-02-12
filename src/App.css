@@ -1,6 +1,3 @@
-@import "tailwindcss/base";
-@import "daisyui";
-
 :root {
   --bg1: #fff7f2;
   --bg2: #fff0ff;
@@ -27,20 +24,13 @@ body,
 }
 
 body {
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 1rem;
 }
 
 #root {
-  max-width: 980px;
   width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  height: 100%;
 }
 
 .header {
@@ -217,4 +207,282 @@ body {
 .calendarWrap {
   display: flex;
   justify-content: center;
+}
+
+/* Full-screen slideshow container */
+.slideshow-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling with easing */
+  scroll-padding: 0;
+}
+
+.slide {
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-content {
+  max-width: 800px;
+  text-align: center;
+  z-index: 10;
+}
+
+.slide-content h1 {
+  color: #2d2d2d;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Pastel gradient backgrounds for slides */
+.slide:nth-child(1) { background: linear-gradient(135deg, #FFE5F0, #FFF0F8); }
+.slide:nth-child(2) { background: linear-gradient(135deg, #E5E5FF, #F0F0FF); }
+.slide:nth-child(3) { background: linear-gradient(135deg, #E5FFF0, #F0FFF8); }
+.slide:nth-child(4) { background: linear-gradient(135deg, #FFF5E5, #FFFAF0); }
+.slide:nth-child(5) { background: linear-gradient(135deg, #E5F8FF, #F0FBFF); }
+.slide:nth-child(6) { background: linear-gradient(135deg, #FFE5FA, #FFF0FD); }
+.slide:nth-child(7) { background: linear-gradient(135deg, #FFE5F0, #FFF0F8); }
+.slide:nth-child(8) { background: linear-gradient(135deg, #E5E5FF, #F0F0FF); }
+.slide:nth-child(9) { background: linear-gradient(135deg, #E5FFF0, #F0FFF8); }
+.slide:nth-child(10) { background: linear-gradient(135deg, #FFF5E5, #FFFAF0); }
+
+/* Confetti canvas */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Auth page styles */
+.auth-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+.auth-card {
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Fuck you page - funny rejection */
+.fuck-you-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+  animation: flash-red 0.5s ease-in-out 3;
+}
+
+.fuck-you-emoji {
+  font-size: 10rem;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* Hacker access granted animation */
+.hacker-container {
+  min-height: 100vh;
+  background: #000;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.matrix-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.matrix-char {
+  position: absolute;
+  font-size: 20px;
+  animation: matrix-rain linear infinite;
+  opacity: 0.8;
+}
+
+.hacker-text {
+  position: relative;
+  z-index: 10;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Destination cards */
+.destination-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  .destination-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .destination-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.destination-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.destination-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.destination-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.destination-content {
+  padding: 1.25rem;
+}
+
+/* Audio player controls */
+.audio-controls {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+/* Mobile optimizations */
+@media (max-width: 520px) {
+  .slide-content h1 {
+    font-size: 2rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .fuck-you-emoji {
+    font-size: 6rem;
+  }
+
+  .destination-image {
+    height: 150px;
+  }
+}
+
+/* Updated calendar styles */
+.calendar {
+  padding: 8px;
+  background: white;
+  border-radius: 12px;
+}
+
+/* Scroll indicator for first slide */
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.7;
+  animation: fade-in-bounce 2s ease-in-out infinite;
+  z-index: 5;
+}
+
+.scroll-indicator-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2d2d2d;
+}
+
+.scroll-indicator-arrow {
+  font-size: 2rem;
+  line-height: 1;
+  animation: bounce-arrow 1.5s ease-in-out infinite;
+}
+
+@keyframes fade-in-bounce {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+@keyframes bounce-arrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Hide scroll indicator on mobile for cleaner look */
+@media (max-width: 520px) {
+  .scroll-indicator-text {
+    font-size: 0.75rem;
+  }
+  .scroll-indicator {
+    bottom: 2rem;
+  }
 }
