@@ -10,7 +10,7 @@ import {
   getAuthQuestions,
 } from '../utils/env';
 
-export default function AuthFlow({ onSuccess, onFail }) {
+export default function AuthFlow({ onSuccess, onFail, onIncorrectAnswer }) {
   const [step, setStep] = useState('initial'); // initial, questions, hacker
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const QUESTIONS = getAuthQuestions();
@@ -19,6 +19,9 @@ export default function AuthFlow({ onSuccess, onFail }) {
     if (isAnnicka) {
       setStep('questions');
     } else {
+      if (onIncorrectAnswer) {
+        onIncorrectAnswer('initial_question', { answer: 'No' });
+      }
       onFail();
     }
   };
@@ -27,6 +30,13 @@ export default function AuthFlow({ onSuccess, onFail }) {
     const correctAnswer = AUTH_ANSWERS[currentQuestion + 1];
 
     if (answer !== correctAnswer) {
+      if (onIncorrectAnswer) {
+        onIncorrectAnswer(`question_${currentQuestion + 1}`, {
+          question: QUESTIONS[currentQuestion].question,
+          answer,
+          correctAnswer
+        });
+      }
       onFail();
       return;
     }

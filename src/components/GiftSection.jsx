@@ -51,7 +51,7 @@ export default function GiftSection({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 py-12 px-4">
+    <div className="min-h-screen bg-linear-to-br from-pink-50 to-purple-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12 animate-slide-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

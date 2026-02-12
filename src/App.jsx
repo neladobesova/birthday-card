@@ -47,6 +47,13 @@ function App() {
     setAppState('slideshow');
   };
 
+  const handleIncorrectAnswer = (questionId, details) => {
+    sendEvent('incorrect_answer', {
+      question: questionId,
+      ...details
+    });
+  };
+
   const handleAuthFail = () => {
     setAppState('fuck-you');
   };
@@ -78,7 +85,11 @@ function App() {
   return (
     <>
       {appState === 'auth' && (
-        <AuthFlow onSuccess={handleAuthSuccess} onFail={handleAuthFail} />
+        <AuthFlow
+          onSuccess={handleAuthSuccess}
+          onFail={handleAuthFail}
+          onIncorrectAnswer={handleIncorrectAnswer}
+        />
       )}
 
       {appState === 'fuck-you' && <FuckYouPage onRetry={handleRetry} />}
