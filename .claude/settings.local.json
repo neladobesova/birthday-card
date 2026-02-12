@@ -10,7 +10,8 @@
       "Bash(npm run dev:*)",
       "Bash(timeout:*)",
       "Bash(curl:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
