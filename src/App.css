@@ -247,16 +247,36 @@ body {
 }
 
 /* Pastel gradient backgrounds for slides */
-.slide:nth-child(1) { background: linear-gradient(135deg, #FFE5F0, #FFF0F8); }
-.slide:nth-child(2) { background: linear-gradient(135deg, #E5E5FF, #F0F0FF); }
-.slide:nth-child(3) { background: linear-gradient(135deg, #E5FFF0, #F0FFF8); }
-.slide:nth-child(4) { background: linear-gradient(135deg, #FFF5E5, #FFFAF0); }
-.slide:nth-child(5) { background: linear-gradient(135deg, #E5F8FF, #F0FBFF); }
-.slide:nth-child(6) { background: linear-gradient(135deg, #FFE5FA, #FFF0FD); }
-.slide:nth-child(7) { background: linear-gradient(135deg, #FFE5F0, #FFF0F8); }
-.slide:nth-child(8) { background: linear-gradient(135deg, #E5E5FF, #F0F0FF); }
-.slide:nth-child(9) { background: linear-gradient(135deg, #E5FFF0, #F0FFF8); }
-.slide:nth-child(10) { background: linear-gradient(135deg, #FFF5E5, #FFFAF0); }
+.slide:nth-child(1) {
+  background: linear-gradient(135deg, #ffe5f0, #fff0f8);
+}
+.slide:nth-child(2) {
+  background: linear-gradient(135deg, #e5e5ff, #f0f0ff);
+}
+.slide:nth-child(3) {
+  background: linear-gradient(135deg, #e5fff0, #f0fff8);
+}
+.slide:nth-child(4) {
+  background: linear-gradient(135deg, #fff5e5, #fffaf0);
+}
+.slide:nth-child(5) {
+  background: linear-gradient(135deg, #e5f8ff, #f0fbff);
+}
+.slide:nth-child(6) {
+  background: linear-gradient(135deg, #ffe5fa, #fff0fd);
+}
+.slide:nth-child(7) {
+  background: linear-gradient(135deg, #ffe5f0, #fff0f8);
+}
+.slide:nth-child(8) {
+  background: linear-gradient(135deg, #e5e5ff, #f0f0ff);
+}
+.slide:nth-child(9) {
+  background: linear-gradient(135deg, #e5fff0, #f0fff8);
+}
+.slide:nth-child(10) {
+  background: linear-gradient(135deg, #fff5e5, #fffaf0);
+}
 
 /* Confetti canvas */
 .confetti-canvas {
@@ -304,7 +324,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+  background: linear-gradient(135deg, #ff6b6b, #ffe66d);
   animation: flash-red 0.5s ease-in-out 3;
 }
 
@@ -318,7 +338,7 @@ body {
   min-height: 100vh;
   background: #000;
   color: #00ff00;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -367,7 +387,7 @@ body {
 
 @media (min-width: 1024px) {
   .destination-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -376,7 +396,9 @@ body {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .destination-card:hover {
@@ -458,7 +480,8 @@ body {
 }
 
 @keyframes fade-in-bounce {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: translateX(-50%) translateY(0);
   }
@@ -469,7 +492,8 @@ body {
 }
 
 @keyframes bounce-arrow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

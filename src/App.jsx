@@ -1,95 +1,96 @@
-import { useState, useEffect, useMemo } from 'react';
-import './App.css';
-import AuthFlow from './components/AuthFlow';
-import FuckYouPage from './components/FuckYouPage';
-import Slideshow from './components/Slideshow';
-import GiftSection from './components/GiftSection';
-import ConfettiAnimation from './components/ConfettiAnimation';
-import AudioPlayer from './components/AudioPlayer';
-import { useDiscordWebhook } from './hooks/useDiscordWebhook';
+import { useState, useEffect, useMemo } from "react";
+import "./App.css";
+import AuthFlow from "./components/AuthFlow";
+import FuckYouPage from "./components/FuckYouPage";
+import Slideshow from "./components/Slideshow";
+import GiftSection from "./components/GiftSection";
+import ConfettiAnimation from "./components/ConfettiAnimation";
+import AudioPlayer from "./components/AudioPlayer";
+import { useDiscordWebhook } from "./hooks/useDiscordWebhook";
+
+// npm run deploy
 
 function App() {
-  const [appState, setAppState] = useState('auth'); // auth, fuck-you, slideshow, gift
+  const [appState, setAppState] = useState("auth"); // auth, fuck-you, slideshow, gift
   const [showConfetti, setShowConfetti] = useState(false);
   const [playAudio, setPlayAudio] = useState(false);
 
   const { sendEvent } = useDiscordWebhook();
 
-  // Available dates from environment variable
-  const availableDates = useMemo(() => {
+  // Available and unavailable dates from environment variables
+  const { availableDates, unavailableDates } = useMemo(() => {
     const datesString = import.meta.env.VITE_AVAILABLE_DATES;
-    if (!datesString) {
-      // Fallback to default dates if not configured
-      return [
-        '2026-03-06',
-        '2026-03-07',
-        '2026-03-13',
-        '2026-03-14',
-        '2026-04-03',
-        '2026-04-04',
-        '2026-04-10',
-        '2026-04-11',
-      ];
-    }
-    return datesString.split(',').map(date => date.trim());
+    const unavailableString = import.meta.env.VITE_UNAVAILABLE_DATES;
+
+    const parseList = s =>
+      (s || "")
+        .split(",")
+        .map(d => d.trim())
+        .filter(Boolean);
+
+    const baseDates = parseList(datesString);
+    const unavailable = unavailableString ? parseList(unavailableString) : [];
+
+    const available = baseDates.filter(d => !unavailable.includes(d));
+    return { availableDates: available, unavailableDates: unavailable };
   }, []);
 
   // Track page load
   useEffect(() => {
-    if (appState === 'slideshow') {
-      sendEvent('page_load');
+    if (appState === "slideshow") {
+      sendEvent("page_load");
     }
   }, [appState, sendEvent]);
 
   const handleAuthSuccess = () => {
     setShowConfetti(true);
     setPlayAudio(true);
-    setAppState('slideshow');
+    setAppState("slideshow");
   };
 
   const handleIncorrectAnswer = (questionId, details) => {
-    sendEvent('incorrect_answer', {
+    sendEvent("incorrect_answer", {
       question: questionId,
-      ...details
+      ...details,
     });
   };
 
   const handleAuthFail = () => {
-    setAppState('fuck-you');
+    setAppState("fuck-you");
   };
 
   const handleRetry = () => {
-    setAppState('auth');
+    setAppState("auth");
   };
 
   const handleScroll = () => {
-    sendEvent('scroll');
+    sendEvent("scroll");
   };
 
   const handleRevealClick = () => {
-    sendEvent('gift_reveal_click');
-    setAppState('gift');
+    sendEvent("gift_reveal_click");
+    setAppState("gift");
     setShowConfetti(false); // Stop confetti when moving to gift section
   };
 
   const handleLinkClick = (destinationName, url) => {
-    sendEvent('link_click', {
+    sendEvent("link_click", {
       destination: destinationName,
-      url: url
+      url: url,
     });
   };
 
   const handleCalendarOpen = () => {
-    sendEvent('calendar_opened');
+    sendEvent("calendar_opened");
   };
 
-  const handleDateSelect = (weekend) => {
-    sendEvent('date_selected', { weekend });
+  const handleDateSelect = weekend => {
+    sendEvent("date_selected", { weekend });
   };
 
   return (
     <>
-      {appState === 'auth' && (
+      {appState === "auth" && (
         <AuthFlow
           onSuccess={handleAuthSuccess}
           onFail={handleAuthFail}
@@ -97,20 +98,24 @@ function App() {
         />
       )}
 
-      {appState === 'fuck-you' && <FuckYouPage onRetry={handleRetry} />}
+      {appState === "fuck-you" && <FuckYouPage onRetry={handleRetry} />}
 
-      {appState === 'slideshow' && (
+      {appState === "slideshow" && (
         <>
           {showConfetti && <ConfettiAnimation />}
-          <Slideshow onScroll={handleScroll} onRevealClick={handleRevealClick} />
+          <Slideshow
+            onScroll={handleScroll}
+            onRevealClick={handleRevealClick}
+          />
           {playAudio && <AudioPlayer autoplay />}
         </>
       )}
 
-      {appState === 'gift' && (
+      {appState === "gift" && (
         <>
           <GiftSection
             availableDates={availableDates}
+            unavailableDates={unavailableDates}
             onDateSelect={handleDateSelect}
             onLinkClick={handleLinkClick}
             onCalendarOpen={handleCalendarOpen}

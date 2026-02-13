@@ -1,7 +1,7 @@
 export default function DestinationCard({ destination, onLinkClick }) {
   const handleClick = () => {
     onLinkClick(destination.name, destination.airbnbUrl);
-    window.open(destination.airbnbUrl, '_blank');
+    window.open(destination.airbnbUrl, "_blank");
   };
 
   return (
@@ -13,17 +13,13 @@ export default function DestinationCard({ destination, onLinkClick }) {
         loading="lazy"
       />
       <div className="destination-content">
-        <h3 className="text-xl font-bold mb-2">
-          {destination.name}
-        </h3>
-        <p className="text-gray-600 mb-4">
-          {destination.description}
-        </p>
+        <h3 className="text-xl font-bold mb-2">{destination.name}</h3>
+        <p className="text-gray-600 mb-4">{destination.description}</p>
         <button
           className="btn btn-primary w-full"
           onClick={handleClick}
         >
-          Proklik na Airbnb 🏠
+          Proklik na Ubytko 🏠
         </button>
       </div>
     </div>
