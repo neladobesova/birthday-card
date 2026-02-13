@@ -18,9 +18,9 @@ export const useDiscordWebhook = () => {
       return;
     }
 
-    // Prevent duplicate events (except link clicks which can happen multiple times)
-    const eventKey = eventType === 'link_click' ? `${eventType}_${Date.now()}` : eventType;
-    if (eventType !== 'link_click' && sentEvents.current.has(eventType)) {
+    // Prevent duplicate events (except link clicks and incorrect answers which can happen multiple times)
+    const eventKey = (eventType === 'link_click' || eventType === 'incorrect_answer') ? `${eventType}_${Date.now()}` : eventType;
+    if (eventType !== 'link_click' && eventType !== 'incorrect_answer' && sentEvents.current.has(eventType)) {
       return;
     }
 
@@ -57,7 +57,7 @@ export const useDiscordWebhook = () => {
         body: JSON.stringify(payload),
       });
 
-      if (response.ok && eventType !== 'link_click') {
+      if (response.ok && eventType !== 'link_click' && eventType !== 'incorrect_answer') {
         sentEvents.current.add(eventType);
       }
     } catch (error) {

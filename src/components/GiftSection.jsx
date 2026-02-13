@@ -39,8 +39,10 @@ export default function GiftSection({
   };
 
   const confirmSelectedWeekend = () => {
-    if (!selectedRange.start || !selectedRange.end) return;
-    const weekendStr = `${selectedRange.start} to ${selectedRange.end}`;
+    if (!selectedRange.start) return;
+    const weekendStr = selectedRange.end
+      ? `${selectedRange.start} to ${selectedRange.end}`
+      : selectedRange.start;
     setWeekend(weekendStr);
     setConfirmed(true);
     setShowCalendar(false);
@@ -119,7 +121,7 @@ export default function GiftSection({
                 <button
                   className="btn btn-primary"
                   onClick={confirmSelectedWeekend}
-                  disabled={!selectedRange.start || !selectedRange.end}
+                  disabled={!selectedRange.start}
                 >
                   {GIFT_CONFIRM_BUTTON}
                 </button>
