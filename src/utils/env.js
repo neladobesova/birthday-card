@@ -188,6 +188,7 @@ export const GIFT_OPEN_CALENDAR = getEnvVar("VITE_GIFT_OPEN_CALENDAR", "Otevří
 export const GIFT_SELECTED_DATE_LABEL = getEnvVar("VITE_GIFT_SELECTED_DATE_LABEL", "Vybraný termín:");
 export const GIFT_CANCEL_BUTTON = getEnvVar("VITE_GIFT_CANCEL_BUTTON", "Zrušit");
 export const GIFT_CONFIRM_BUTTON = getEnvVar("VITE_GIFT_CONFIRM_BUTTON", "Potvrdit termín");
+export const GIFT_CONFIRMATION_TEXT = getEnvVar("VITE_GIFT_CONFIRMATION_TEXT", "Už se těším");
 
 // Slideshow
 export const SLIDESHOW_REVEAL_BUTTON = getEnvVar("VITE_SLIDESHOW_REVEAL_BUTTON", "Ukaž dáreček 🎁");

@@ -7,6 +7,7 @@ import {
   GIFT_SELECTED_DATE_LABEL,
   GIFT_CANCEL_BUTTON,
   GIFT_CONFIRM_BUTTON,
+  GIFT_CONFIRMATION_TEXT,
   getDestinations,
 } from "../utils/env";
 import DestinationCard from "./DestinationCard";
@@ -18,6 +19,7 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
   const [confirmed, setConfirmed] = useState(false);
   const [weekend, setWeekend] = useState("");
   const [showHearts, setShowHearts] = useState(false);
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   const destinations = getDestinations();
 
@@ -154,6 +156,7 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
     setConfirmed(true);
     setShowCalendar(false);
     setShowHearts(true);
+    setShowConfirmationDialog(true);
     onDateSelect(weekendStr);
   };
 
@@ -167,6 +170,24 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
   return (
     <>
       {showHearts && <HeartsAnimation />}
+
+      {/* Confirmation Dialog */}
+      {showConfirmationDialog && (
+        <div className="fixed inset-0 backdrop-blur-md flex items-center justify-center z-50" onClick={() => setShowConfirmationDialog(false)}>
+          <div className="bg-white rounded-2xl p-8 shadow-2xl max-w-md mx-4 animate-bounce-in" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-3xl font-bold text-center text-pink-600 mb-4">
+              {GIFT_CONFIRMATION_TEXT} 💖
+            </h3>
+            <button
+              className="btn btn-primary w-full mt-4"
+              onClick={() => setShowConfirmationDialog(false)}
+            >
+              Zavřít
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="min-h-screen bg-linear-to-br from-pink-50 to-purple-50 py-12 px-4">
         <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12 animate-slide-up">
