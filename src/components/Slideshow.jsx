@@ -18,11 +18,6 @@ export default function Slideshow({ onScroll, onRevealClick }) {
   // Track manual scroll to pause auto-scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (!hasScrolled.current && containerRef.current.scrollTop > 50) {
-        hasScrolled.current = true;
-        onScroll();
-      }
-
       // Detect manual user scroll
       userInteractedRef.current = true;
 
@@ -36,6 +31,12 @@ export default function Slideshow({ onScroll, onRevealClick }) {
         const scrollPosition = container.scrollTop;
         const calculatedSlide = Math.round(scrollPosition / slideHeight);
         setCurrentSlide(calculatedSlide);
+
+        // Only trigger scroll event when reaching the last page
+        if (!hasScrolled.current && calculatedSlide >= slideTexts.length - 1) {
+          hasScrolled.current = true;
+          onScroll();
+        }
       }
     };
 

@@ -43,6 +43,9 @@ export const useDiscordWebhook = () => {
                  eventType === 'scroll' ? 0x7AA2FF : // Blue
                  eventType === 'link_click' ? 0xFFD700 : // Gold
                  eventType === 'date_selected' ? 0x90EE90 : // Green
+                 eventType === 'incorrect_answer' ? 0xFF4444 : // Red
+                 eventType === 'gift_reveal_click' ? 0xFF69B4 : // Hot Pink
+                 eventType === 'calendar_opened' ? 0x9370DB : // Medium Purple
                  0xCCCCCC, // Default gray
           timestamp: new Date().toISOString(),
         }],

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   AUTH_ANSWERS,
   AUTH_INITIAL_EMOJI,
@@ -14,6 +14,12 @@ export default function AuthFlow({ onSuccess, onFail, onIncorrectAnswer }) {
   const [step, setStep] = useState('initial'); // initial, questions, hacker
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const QUESTIONS = getAuthQuestions();
+
+  // Reset state when component mounts (when user retries)
+  useEffect(() => {
+    setStep('initial');
+    setCurrentQuestion(0);
+  }, []);
 
   const handleInitialAnswer = (isAnnicka) => {
     if (isAnnicka) {

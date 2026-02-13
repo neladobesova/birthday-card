@@ -15,7 +15,8 @@ import Calendar from './Calendar';
 export default function GiftSection({
   availableDates,
   onDateSelect,
-  onLinkClick
+  onLinkClick,
+  onCalendarOpen
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedRange, setSelectedRange] = useState({ start: null, end: null });
@@ -81,7 +82,12 @@ export default function GiftSection({
             <div className="text-center">
               <button
                 className="btn btn-primary btn-lg"
-                onClick={() => setShowCalendar(true)}
+                onClick={() => {
+                  setShowCalendar(true);
+                  if (onCalendarOpen) {
+                    onCalendarOpen();
+                  }
+                }}
               >
                 {GIFT_OPEN_CALENDAR}
               </button>

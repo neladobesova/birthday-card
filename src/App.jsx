@@ -67,6 +67,7 @@ function App() {
   };
 
   const handleRevealClick = () => {
+    sendEvent('gift_reveal_click');
     setAppState('gift');
     setShowConfetti(false); // Stop confetti when moving to gift section
   };
@@ -76,6 +77,10 @@ function App() {
       destination: destinationName,
       url: url
     });
+  };
+
+  const handleCalendarOpen = () => {
+    sendEvent('calendar_opened');
   };
 
   const handleDateSelect = (weekend) => {
@@ -108,6 +113,7 @@ function App() {
             availableDates={availableDates}
             onDateSelect={handleDateSelect}
             onLinkClick={handleLinkClick}
+            onCalendarOpen={handleCalendarOpen}
           />
           {playAudio && <AudioPlayer autoplay />}
         </>
