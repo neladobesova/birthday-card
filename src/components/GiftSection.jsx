@@ -11,11 +11,13 @@ import {
 } from "../utils/env";
 import DestinationCard from "./DestinationCard";
 import Calendar from "./Calendar";
+import HeartsAnimation from "./HeartsAnimation";
 
 export default function GiftSection({ availableDates, unavailableDates, onDateSelect, onLinkClick, onCalendarOpen }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [weekend, setWeekend] = useState("");
+  const [showHearts, setShowHearts] = useState(false);
 
   const destinations = getDestinations();
 
@@ -151,6 +153,7 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
     setWeekend(weekendStr);
     setConfirmed(true);
     setShowCalendar(false);
+    setShowHearts(true);
     onDateSelect(weekendStr);
   };
 
@@ -162,8 +165,10 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-pink-50 to-purple-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <>
+      {showHearts && <HeartsAnimation />}
+      <div className="min-h-screen bg-linear-to-br from-pink-50 to-purple-50 py-12 px-4">
+        <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12 animate-slide-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">{GIFT_TEXT} 🎁</h2>
           <p className="text-xl text-gray-600">{GIFT_SUBTITLE}</p>
@@ -234,5 +239,6 @@ export default function GiftSection({ availableDates, unavailableDates, onDateSe
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -107,22 +107,20 @@ function App() {
             onScroll={handleScroll}
             onRevealClick={handleRevealClick}
           />
-          {playAudio && <AudioPlayer autoplay />}
         </>
       )}
 
       {appState === "gift" && (
-        <>
-          <GiftSection
-            availableDates={availableDates}
-            unavailableDates={unavailableDates}
-            onDateSelect={handleDateSelect}
-            onLinkClick={handleLinkClick}
-            onCalendarOpen={handleCalendarOpen}
-          />
-          {playAudio && <AudioPlayer autoplay />}
-        </>
+        <GiftSection
+          availableDates={availableDates}
+          unavailableDates={unavailableDates}
+          onDateSelect={handleDateSelect}
+          onLinkClick={handleLinkClick}
+          onCalendarOpen={handleCalendarOpen}
+        />
       )}
+
+      {playAudio && <AudioPlayer autoplay />}
     </>
   );
 }
